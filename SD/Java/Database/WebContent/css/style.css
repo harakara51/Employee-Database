@@ -1,0 +1,50 @@
+
+
+
+body {
+	background-image:  url('images/pic7.jpg'); 
+	
+}
+#card-table5 {
+
+width: 80%;
+padding: .5em;
+margin:0 auto;
+margin-top: 3em;	
+}
+/* #result2 {
+width:70%;
+}
+ */
+
+ 
+ #employee, advsearch {
+ width:80%;
+ margin:0 auto;
+ }
+ 
+ 
+ #advsearch {
+ 
+  width:80%;
+ margin:5em auto;
+ 
+ }
+
+ #titlerow {
+
+ margin:3em auto;
+ } 
+ #title {
+ width:50%;
+ margin:0 auto;
+ text-align: center;
+ }
+ 
+ 
+ #tableholder {
+ overflow: auto;
+ //height:75%;
+ }
+ 
+ 
