@@ -26,7 +26,7 @@
 				<a href="#!" class="brand-logo">Database</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="index.jsp">Home</a></li>
-					<li><a href="addNovel.jsp">Update</a></li>
+					<li><a href="update.jsp">Update</a></li>
 
 				</ul>
 			</div>
@@ -84,7 +84,7 @@
         </div>
         <div class="input-field col s3">
         <select name="job_id" required >
-        <option selected disabled>Choose JOB here</option>
+     
         <option value="1">President</option>
   <option value="2">Vice President</option>
   <option value="3">Director </option>
@@ -121,7 +121,7 @@
        </div>
          <div class="input-field col s3">
         <select name="department_id" required >
-  <option selected disabled>Choose DEPT here</option>
+
         <option value="1">Research </option>
   <option value="2">Administration   </option>
   <option value="3">Software Development </option>
@@ -179,7 +179,7 @@
     <li>
       <div class="collapsible-header"><i class="material-icons">search</i>Advanced Search</div>
       <div class="collapsible-body lime lighten-5">
-    <form action="Advdatabase.do" method="GET">
+    <form action="updateDatabase.do" method="POST">
 		<input type="text" name ="fieldsChoice">
 
 			<button class="btn waves-effect waves-light blue darken-2"

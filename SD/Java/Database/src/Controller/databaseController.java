@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes({"stuff"})
+
 public class databaseController
 {
 	
@@ -41,15 +41,8 @@ public class databaseController
 	private DatabaseDAO database;
 	private ArrayList<ArrayList<String>> table = new ArrayList<>();
 	private ArrayList<String> tableHead = new ArrayList<>();
-	@Autowired
 
 
-	@ModelAttribute("stuff")
-	public int createCounterObject()
-	{
-		int counter = 24;
-		return counter;
-	}
 
 	
 	
@@ -57,6 +50,7 @@ public class databaseController
 	@RequestMapping(path = "database.do", params = "fields_Choice", method = RequestMethod.GET)
 	public ModelAndView searchByUserQuery(@RequestParam("fields_Choice") String Fields2, @RequestParam("table") String tables) throws ClassNotFoundException, SQLException
 	{
+		
 		fields= "SELECT " + Fields2 + " FROM " + tables;
 		System.out.println(fields);
 		ModelAndView mv = new ModelAndView();
@@ -74,7 +68,7 @@ public class databaseController
 		
 	}
 	
-	@RequestMapping(path = "Advdatabase.do", params = "fieldsChoice", method = RequestMethod.GET)
+	@RequestMapping(path = "Advdatabase.do", params = "fieldsChoice", method = RequestMethod.POST)
 	public ModelAndView searchADVQuery(@RequestParam("fieldsChoice") String Fields2) throws ClassNotFoundException, SQLException
 	{
 		System.out.println(Fields2);
@@ -102,7 +96,7 @@ public class databaseController
 	public ModelAndView updateDatabase(employeeBean employee, @RequestParam("database") String database) throws ClassNotFoundException, SQLException
 	{
 		fields= "INSERT INTO " + database + employee.toquery() ;
-		//System.out.println(fields);
+		System.out.println(fields);
 		System.out.println("inside method to create new employees");
 		DatabaseDAO database2 = new DatabaseDAO();	
 		
@@ -116,10 +110,10 @@ public class databaseController
 		
 	}
 	
-	@RequestMapping(path = "updateDatabase.do", method = RequestMethod.GET)
+	@RequestMapping(path = "updateDatabase.do", method = RequestMethod.POST)
 	public ModelAndView updateDatabaseADV(@RequestParam("fieldsChoice") String query) throws ClassNotFoundException, SQLException
 	{
-		
+		System.out.println("in adv search method");
 		DatabaseDAO database2 = new DatabaseDAO();	
 		
 		database2.insertToDatabase(query);
