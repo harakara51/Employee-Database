@@ -76,8 +76,8 @@
     <li>
       <div class="collapsible-header"><i class="material-icons">search</i>Advanced Search</div>
       <div class="collapsible-body lime lighten-5">
-    <form action="Advdatabase.do" method="GET">
-		<input type="search">
+    <form action="updateDatabase.do"  method="GET">
+		<input type="text" name ="fieldsChoice">
 			<button class="btn waves-effect waves-light blue darken-2"
 				type="submit" name="ReadMORE">
 				Submit Query <i class="material-icons right">send</i>

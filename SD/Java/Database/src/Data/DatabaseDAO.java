@@ -94,5 +94,48 @@ public class DatabaseDAO
 		
 		
 	}
+	
+	public ArrayList<ArrayList<String>> advSearch(String query2) throws SQLException, ClassNotFoundException
+	{
+		
+		System.out.println("in advSearch method to return data");
+		//String query2 = "SELECT" + databaseController.fields + "FROM" + tables";
+		query = query2;
+		Class.forName("com.mysql.jdbc.Driver");
+		conn = DriverManager.getConnection(url, username, password);
+
+		String sqlText = query;
+		Statement stmt = conn.createStatement();
+
+		rs = stmt.executeQuery(sqlText);
+		rs1 = rs.getMetaData();
+		System.out.println(rs1.getColumnCount());
+		
+		
+		for (int i = 1; (i < rs1.getColumnCount() + 1); i++)
+		{
+			rowhead.add((rs1.getColumnName(i)));
+
+		}
+		table.add(rowhead);
+		
+		while (rs.next())		
+		{
+			row = new ArrayList<>();
+			for (int i = 1; (i < rs1.getColumnCount() + 1); i++)
+			{
+				row.add(rs.getString(i));
+			}
+			ArrayList<String> temp = new ArrayList<>();
+			
+			table.add(row);
+		}
+	rs.close();
+		conn.close();
+		return table; 
+	}
+	
+	
+	
 		
 }

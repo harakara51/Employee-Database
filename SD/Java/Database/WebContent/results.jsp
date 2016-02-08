@@ -26,7 +26,7 @@
 				<a href="#!" class="brand-logo">Database</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="index.jsp">Home</a></li>
-					<li><a href="addNovel.jsp">Update</a></li>
+					<li><a href="update.jsp">Update</a></li>
 
 				</ul>
 			</div>

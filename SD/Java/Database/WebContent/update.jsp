@@ -178,9 +178,9 @@
 <ul class="collapsible" data-collapsible="accordion" id ="advsearch">
     <li>
       <div class="collapsible-header"><i class="material-icons">search</i>Advanced Search</div>
-      <div class="collapsible-body lime lighten-5"">
+      <div class="collapsible-body lime lighten-5">
     <form action="Advdatabase.do" method="GET">
-		<input type="search">
+		<input type="text" name ="fieldsChoice">
 
 			<button class="btn waves-effect waves-light blue darken-2"
 				type="submit" name="ReadMORE">

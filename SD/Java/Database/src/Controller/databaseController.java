@@ -74,18 +74,18 @@ public class databaseController
 		
 	}
 	
-	@RequestMapping(path = "Advdatabase.do", params = "fields_Choice", method = RequestMethod.GET)
-	public ModelAndView searchADVQuery(@RequestParam("fields_Choice") String Fields2, @RequestParam("table") String tables) throws ClassNotFoundException, SQLException
+	@RequestMapping(path = "Advdatabase.do", params = "fieldsChoice", method = RequestMethod.GET)
+	public ModelAndView searchADVQuery(@RequestParam("fieldsChoice") String Fields2) throws ClassNotFoundException, SQLException
 	{
-		fields= "SELECT " + Fields2 + " FROM " + tables;
-		System.out.println(fields);
+		System.out.println(Fields2);
+		System.out.println("in adv search method");
+		
 		ModelAndView mv = new ModelAndView();
 		
-		database = new DatabaseDAO(Fields2, tables);
-		table =database.openDatabaseConnection();
+		database = new DatabaseDAO();
+		table =database.advSearch(Fields2);
 		tableHead = table.get(0);
-		System.out.println(tableHead.toString());
-	table.remove(0);
+		table.remove(0);
 		mv.setViewName("results.jsp");
 		mv.addObject("fields", Fields2);
 		mv.addObject("TABLE", table);
@@ -107,6 +107,22 @@ public class databaseController
 		DatabaseDAO database2 = new DatabaseDAO();	
 		
 		database2.insertToDatabase(fields);
+	
+		ModelAndView mv = new ModelAndView();
+	
+		mv.setViewName("update.jsp");
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping(path = "updateDatabase.do", method = RequestMethod.GET)
+	public ModelAndView updateDatabaseADV(@RequestParam("fieldsChoice") String query) throws ClassNotFoundException, SQLException
+	{
+		
+		DatabaseDAO database2 = new DatabaseDAO();	
+		
+		database2.insertToDatabase(query);
 	
 		ModelAndView mv = new ModelAndView();
 	
