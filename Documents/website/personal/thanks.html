@@ -1,0 +1,191 @@
+<html>
+
+
+
+<head>
+
+  <title>Anup Sebastian Webpage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+<?php 
+$pageTitle = "homepage.php";
+
+
+if (isset($_POST['submit']))
+  {
+    
+
+                      $name = $_POST['name']; // required
+                    $email_from = $_POST['email']; // required
+                    $phone = $_POST['phone']; // not required
+                    $comments = $_POST['comment']; // required
+
+                    // validation expected data exists
+                    if(!isset($_POST['name']) ||
+                    !isset($_POST['email']) ||
+                    !isset($_POST['phone']) || 
+                    !isset($_POST['comments']))
+         
+                     
+                       echo ('<script type="text/javascript">alert ("We are sorry, 
+                        but there appears to be a problem with the form you submitted.);</script>');
+         
+                    $string_exp = "/^[A-Za-z .'-]+$/";
+                    $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/'; 
+
+
+                    $error_message = "";
+                    
+                    if(!preg_match($email_exp,$email_from)) {
+                    echo ('<script type="text/javascript">alert ("The Email Address you entered does not appear to be valid./>");</script>');    
+                    }
+                    
+                    else if(!preg_match($string_exp,$name)) {
+                    echo ('<script type="text/javascript">alert ("The First Name you entered does not appear to be valid. />");</script>');    
+                    
+                    }
+                    else if(strlen($comments) < 2) {
+                    echo ('<script type="text/javascript">alert ("Please enter a valid Comment");</script>');   
+                    }
+                    else if(strlen($error_message) > 0) {
+                    // echo ($error_message);
+
+                    echo ('<script type="text/javascript">alert ("Please Fill out all the information");</script>');
+                    }
+
+                    else 
+                    {    
+
+                    $email_message = "\n\n";
+                     
+                    $email_message .= "Name is: ".$name."\n";
+                    $email_message .= "Email is : ".$email_from."\n";
+                    $email_message .= "Phone is : ".$phone."\n";
+                    $email_message .= "Comments are: ".$comments."\n";
+
+ 
+
+ 
+
+                        require ("PHPMailer\PHPMailerAutoload.php");
+
+
+                    $mail = new PHPMailer();
+
+
+
+                    $mail->IsSMTP();                                      // set mailer to use SMTP
+
+                    
+                    $mail->Username = "criticalmass53@gmail.com";  // SMTP username
+                    $mail->Password = "53criticalmass53"; // SMTP password
+                    $mail->SMTPDebug  = 0;
+
+
+                    $mail->SMTPAuth   = true;                  // enable SMTP authentication
+                    $mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+                    $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+                    $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+
+
+
+             
+                    // $mail->setFrom($email_from, $name);
+                     
+
+                    $mail->Subject = "Email from website";
+
+                    $mail->From = "criticalmass53@gmail.com";
+                    $mail->FromName = "mailer";
+                    $mail->AddAddress("hafu52@gmail.com");
+                    $mail->AddAddress("harakara51@gmail.com");
+                    $address = "harakara51@gmail.com";
+
+                    $mail->WordWrap = 500;   
+                    $mail->IsHTML(true);                                  // set email format to HTML
+
+                    //$mail->Subject = "Here is the subject";
+                    $mail->Body    = 'This is a message retrieved from the website from ' .$email_from. '</br>
+                                <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+                            <tr>
+                                <td align="center" valign="top">
+                                    <table border="0" cellpadding="20" cellspacing="0" width="800" id="emailContainer">
+                                        <tr>
+                                            <td align="center" valign="top">
+                                                <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailHeader">
+                                                    <tr>
+                                                        <td align="center" valign="top">
+                                                            The name of the person is: ' .$name . '
+                                                        </td>
+                                                        <td align="center" valign="top">
+                                                            The Person email address is : ' .$email_from . '
+                                                        </td>
+                                                        <td align="center" valign="top">
+                                                            The Person phone number : ' .$phone . '
+                                                        </td>
+
+
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top">
+                                                <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailBody">
+                                                    <tr>
+                                                        <td align="center" valign="top">
+                                                            The following comments were left: ' .$comments. '
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        
+                        </table>' . $email_message;
+
+
+
+                         
+
+
+
+
+                                $mail->AltBody = "This is the body in plain text for non-HTML mail clients" . $email_message;
+                               
+
+                                if(!$mail->Send())
+                                {
+                                   echo "Message could not be sent. <p>";
+                                   echo "Mailer Error: " . $mail->ErrorInfo;
+                                   exit;
+                                }
+
+                                echo "";
+                         header('Location: Thanks.php');  
+
+                        } 
+}
+?>
+
+  <div class="intro orange lighten-2 z-depth-1">
+  <h1 class="grey-text text-lighten-5">Thank you</h1>
+  <h5 class="grey lighten-4 grey-text text-darken-1">For contacting us, I will get back to you as soon as possible</h5>
+</div>
+<div class="container about">
+  <h5><a href="http://harakara.org"> Click here to go back to my home page <a></h5>
+ 
+
+  <!-- jQuery is required by Materialize to function -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript">
+    //custom JS code
+  </script>
+
+</body>
+</html>
